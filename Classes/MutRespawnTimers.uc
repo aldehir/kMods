@@ -1,4 +1,4 @@
-class RespawnTimers extends Mutator
+class MutRespawnTimers extends Mutator
     config(RespawnTimers);
 
 struct TimerConfig {
@@ -22,8 +22,8 @@ function bool CheckReplacement(Actor Other, out byte bSuperRelevant) {
     if (P != None) {
         for (i = 0; i < RespawnTimer.Length; i++) {
             if (P.IsA(RespawnTimer[i].PickupClass.Name)) {
-                P.RespawnTime = RespawnTimer[i].Value;
-                log("Set Respawn Time of "@P.Name@"to"@P.RespawnTime);
+                P.RespawnTime = RespawnTimer[i].Value * Level.TimeDilation;
+                log("Set Respawn Time of "@P.Name@"to"@RespawnTimer[i].Value);
             }
         }
     }
